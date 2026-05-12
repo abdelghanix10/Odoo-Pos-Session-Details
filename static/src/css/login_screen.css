@@ -1,0 +1,108 @@
+/* ============================================================
+   print_sessions_details – Odoo POS-style login screen
+   Matches the white-card / dark-button language of Odoo POS 19
+   ============================================================ */
+
+/* ---------- Session details card ----------
+   Mirrors the ".open-register-btn" card: white, rounded-4, light shadow
+   ------------------------------------------------------------ */
+.psd-session-card {
+    background: #fff;
+    border-radius: 1rem;           /* same as rounded-4 */
+    padding: 1.25rem 1.75rem;
+    min-width: 260px;
+    max-width: 360px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    animation: psd-fade-in 0.35s ease;
+}
+
+.psd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    gap: 1.5rem;
+}
+
+.psd-row + .psd-row {
+    border-top: 1px solid #f0f0f0;
+}
+
+.psd-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    color: #212529;
+    margin-bottom: 0.75rem;
+    white-space: nowrap;
+}
+
+.psd-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #6c757d;          /* muted grey – same as Odoo's secondary text */
+    white-space: nowrap;
+}
+
+.psd-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #212529;          /* Odoo body text colour */
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Ending balance gets the Odoo "success" green */
+.psd-balance {
+    color: #198754;
+}
+
+.psd-loading {
+    color: #6c757d;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 0.4rem 0;
+}
+
+/* ---------- Print action buttons ----------
+   Same dark pill as the "Backend" button: btn btn-dark btn-lg
+   ------------------------------------------------------------ */
+.psd-print-actions {
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.psd-btn-print,
+.psd-btn-print-details {
+    /* Identical to Odoo's .select-logout (Backend) button */
+    background-color: #212529 !important;
+    border-color: #212529 !important;
+    color: #fff !important;
+    border-radius: 0.5rem !important;   /* btn-lg radius */
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.55rem 1.35rem;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.psd-btn-print:hover,
+.psd-btn-print-details:hover {
+    background-color: #343a40 !important;
+    transform: translateY(-1px);
+}
+
+.psd-btn-print:active,
+.psd-btn-print-details:active {
+    background-color: #1a1e21 !important;
+    transform: translateY(0);
+}
+
+/* ---------- Fade-in animation ---------- */
+@keyframes psd-fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}

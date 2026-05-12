@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!--
+        print_sessions_details – Login Screen extension
+
+        Injects:
+          ① A session-details card inside .login-body (flex container that
+             already holds the "Open Register" card – so it sits right beside /
+             below it naturally in the same layout).
+          ② "Print" and "Print Details" buttons before the Backend button,
+             styled identically to the Backend button.
+
+        Both blocks are only rendered when showSessionDetailsBlock is true
+        (feature enabled + register is closed + there is a prior session).
+    -->
+    <t t-name="print_sessions_details.LoginScreen"
+       t-inherit="point_of_sale.LoginScreen"
+       t-inherit-mode="extension">
+
+        <!-- ① Session details card – appended inside the .login-body flex row -->
+        <xpath expr="//div[hasclass('login-body')]" position="inside">
+            <t t-if="showSessionDetailsBlock">
+                <div class="psd-session-card">
+                    <div class="psd-title">
+                        Session Details
+                    </div>
+                    <t t-if="sessionDetails.loading">
+                        <div class="psd-loading">
+                            <i class="fa fa-spinner fa-spin me-1"/> Loading…
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="psd-row">
+                            <span class="psd-label">Opening Date</span>
+                            <span class="psd-value" t-esc="sessionDetails.opening_date"/>
+                        </div>
+                        <div class="psd-row">
+                            <span class="psd-label">Closing Date</span>
+                            <span class="psd-value" t-esc="sessionDetails.closing_date"/>
+                        </div>
+                        <div class="psd-row">
+                            <span class="psd-label">Ending Balance</span>
+                            <span class="psd-value psd-balance" t-esc="sessionDetails.ending_balance"/>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- ② Print buttons – immediately before the Backend button wrapper -->
+        <xpath expr="//div[hasclass('w-100') and hasclass('d-flex') and hasclass('justify-content-center')]" position="before">
+            <t t-if="showSessionDetailsBlock">
+                <div class="psd-print-actions w-100 d-flex justify-content-center gap-2 mb-2">
+                    <button class="psd-btn-print btn btn-dark btn-lg"
+                            t-on-click="() => this.printSessionSummary()">
+                        <i class="fa fa-print"/>
+                        Print
+                    </button>
+                    <button class="psd-btn-print-details btn btn-dark btn-lg"
+                            t-on-click="() => this.printSessionDetails()">
+                        <i class="fa fa-file-text-o"/>
+                        Print Details
+                    </button>
+                </div>
+            </t>
+        </xpath>
+
+    </t>
+</templates>
